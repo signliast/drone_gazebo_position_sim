@@ -16,6 +16,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ros-humble-geometry-msgs \
     ros-humble-image-transport \
     ros-humble-ros-gz-bridge \
+    ros-humble-ros-gz-interfaces \
     ros-humble-mavros \
     ros-humble-mavros-extras \
     git \
@@ -27,6 +28,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     iputils-ping \
     v4l-utils \
     && rm -rf /var/lib/apt/lists/*
+
+RUN /opt/ros/humble/lib/mavros/install_geographiclib_datasets.sh
+
+RUN echo "source /opt/ros/humble/setup.bash" >> /root/.bashrc && \
+    echo "export ROS_DOMAIN_ID=10" >> /root/.bashrc && \
+    echo "export RMW_IMPLEMENTATION=rmw_fastrtps_cpp" >> /root/.bashrc
 
 WORKDIR /ws
 
