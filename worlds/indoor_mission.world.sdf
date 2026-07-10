@@ -1,0 +1,4907 @@
+<?xml version="1.0"?>
+    <sdf version="1.9">
+    <world name="indoor_mission">
+        <scene>
+            <ambient>0.95 0.95 0.95 1</ambient><background>0.95 0.95 0.95 1</background>
+            <shadows>false</shadows><grid>false</grid><origin_visual>false</origin_visual>
+        </scene>
+        
+        <light type="directional" name="sun">
+            <cast_shadows>false</cast_shadows>
+            <pose>0 0 20 0 0 0</pose>
+            <diffuse>1.0 1.0 1.0 1</diffuse>
+            <specular>0.3 0.3 0.3 1</specular>
+            <direction>0.0 0.0 -1.0</direction>
+        </light>
+        
+        <plugin filename="ignition-gazebo-physics-system" name="ignition::gazebo::systems::Physics"/>
+        <plugin filename="ignition-gazebo-user-commands-system" name="ignition::gazebo::systems::UserCommands"/>
+        <plugin filename="ignition-gazebo-scene-broadcaster-system" name="ignition::gazebo::systems::SceneBroadcaster"/>
+        <plugin filename="ignition-gazebo-sensors-system" name="ignition::gazebo::systems::Sensors"><render_engine>ogre</render_engine></plugin>
+    
+    <model name="safe_area_floor">
+        <static>true</static>
+        <pose>0 0 -0.01 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>32.0 23.0 0.02</size></box></geometry>
+                <material><ambient>0.88 0.96 0.88 1</ambient><diffuse>0.88 0.96 0.88 1</diffuse></material>
+            </visual>
+            
+        <collision name="collision">
+            <geometry><box><size>32.0 23.0 0.02</size></box></geometry>
+        </collision>
+        
+        </link>
+    </model>
+    
+    <model name="mission_area_floor">
+        <static>true</static>
+        <pose>0 0 0 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>24.0 15.0 0.002</size></box></geometry>
+                <material><ambient>0.86 0.80 0.65 1</ambient><diffuse>0.86 0.80 0.65 1</diffuse></material>
+            </visual>
+            
+        <collision name="collision">
+            <geometry><box><size>24.0 15.0 0.002</size></box></geometry>
+        </collision>
+        
+        </link>
+    </model>
+    
+    <model name="safe_boundary_top">
+        <static>true</static>
+        <pose>0 11.5 0.005 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>32.0 0.14 0.01</size></box></geometry>
+                <material><ambient>0.0 0.6 0.0 1</ambient><diffuse>0.0 0.6 0.0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="safe_boundary_bottom">
+        <static>true</static>
+        <pose>0 -11.5 0.005 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>32.0 0.14 0.01</size></box></geometry>
+                <material><ambient>0.0 0.6 0.0 1</ambient><diffuse>0.0 0.6 0.0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="safe_boundary_left">
+        <static>true</static>
+        <pose>-16.0 0 0.005 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.14 23.0 0.01</size></box></geometry>
+                <material><ambient>0.0 0.6 0.0 1</ambient><diffuse>0.0 0.6 0.0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="safe_boundary_right">
+        <static>true</static>
+        <pose>16.0 0 0.005 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.14 23.0 0.01</size></box></geometry>
+                <material><ambient>0.0 0.6 0.0 1</ambient><diffuse>0.0 0.6 0.0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="mission_boundary_top">
+        <static>true</static>
+        <pose>0 7.5 0.006 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>24.0 0.1 0.012</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="mission_boundary_bottom">
+        <static>true</static>
+        <pose>0 -7.5 0.006 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>24.0 0.1 0.012</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="mission_boundary_left">
+        <static>true</static>
+        <pose>-12.0 0 0.006 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.1 15.0 0.012</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="mission_boundary_right">
+        <static>true</static>
+        <pose>12.0 0 0.006 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.1 15.0 0.012</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="grid_vertical_0">
+        <static>true</static>
+        <pose>-9.0 0 0.006 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.1 15.0 0.012</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="grid_vertical_1">
+        <static>true</static>
+        <pose>-6.0 0 0.006 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.1 15.0 0.012</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="grid_vertical_2">
+        <static>true</static>
+        <pose>-3.0 0 0.006 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.1 15.0 0.012</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="grid_vertical_3">
+        <static>true</static>
+        <pose>0.0 0 0.006 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.1 15.0 0.012</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="grid_vertical_4">
+        <static>true</static>
+        <pose>3.0 0 0.006 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.1 15.0 0.012</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="grid_vertical_5">
+        <static>true</static>
+        <pose>6.0 0 0.006 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.1 15.0 0.012</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="grid_vertical_6">
+        <static>true</static>
+        <pose>9.0 0 0.006 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.1 15.0 0.012</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="grid_horizontal_0">
+        <static>true</static>
+        <pose>0 -4.5 0.006 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>24.0 0.1 0.012</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="grid_horizontal_1">
+        <static>true</static>
+        <pose>0 -1.5 0.006 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>24.0 0.1 0.012</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="grid_horizontal_2">
+        <static>true</static>
+        <pose>0 1.5 0.006 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>24.0 0.1 0.012</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="grid_horizontal_3">
+        <static>true</static>
+        <pose>0 4.5 0.006 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>24.0 0.1 0.012</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_0_white_board">
+        <static>true</static>
+        <pose>-9.0 -4.5 0.015 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.9 0.9 0.004</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_0_cell_0_0">
+        <static>true</static>
+        <pose>-9.291666666666666 -4.208333333333334 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_0_cell_0_1">
+        <static>true</static>
+        <pose>-9.174999999999999 -4.208333333333334 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_0_cell_0_2">
+        <static>true</static>
+        <pose>-9.058333333333334 -4.208333333333334 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_0_cell_0_3">
+        <static>true</static>
+        <pose>-8.941666666666666 -4.208333333333334 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_0_cell_0_4">
+        <static>true</static>
+        <pose>-8.825 -4.208333333333334 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_0_cell_0_5">
+        <static>true</static>
+        <pose>-8.708333333333332 -4.208333333333334 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_0_cell_1_0">
+        <static>true</static>
+        <pose>-9.291666666666666 -4.325 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_0_cell_1_1">
+        <static>true</static>
+        <pose>-9.174999999999999 -4.325 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_0_cell_1_2">
+        <static>true</static>
+        <pose>-9.058333333333334 -4.325 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_0_cell_1_3">
+        <static>true</static>
+        <pose>-8.941666666666666 -4.325 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_0_cell_1_4">
+        <static>true</static>
+        <pose>-8.825 -4.325 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_0_cell_1_5">
+        <static>true</static>
+        <pose>-8.708333333333332 -4.325 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_0_cell_2_0">
+        <static>true</static>
+        <pose>-9.291666666666666 -4.441666666666667 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_0_cell_2_1">
+        <static>true</static>
+        <pose>-9.174999999999999 -4.441666666666667 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_0_cell_2_2">
+        <static>true</static>
+        <pose>-9.058333333333334 -4.441666666666667 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_0_cell_2_3">
+        <static>true</static>
+        <pose>-8.941666666666666 -4.441666666666667 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_0_cell_2_4">
+        <static>true</static>
+        <pose>-8.825 -4.441666666666667 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_0_cell_2_5">
+        <static>true</static>
+        <pose>-8.708333333333332 -4.441666666666667 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_0_cell_3_0">
+        <static>true</static>
+        <pose>-9.291666666666666 -4.558333333333334 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_0_cell_3_1">
+        <static>true</static>
+        <pose>-9.174999999999999 -4.558333333333334 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_0_cell_3_2">
+        <static>true</static>
+        <pose>-9.058333333333334 -4.558333333333334 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_0_cell_3_3">
+        <static>true</static>
+        <pose>-8.941666666666666 -4.558333333333334 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_0_cell_3_4">
+        <static>true</static>
+        <pose>-8.825 -4.558333333333334 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_0_cell_3_5">
+        <static>true</static>
+        <pose>-8.708333333333332 -4.558333333333334 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_0_cell_4_0">
+        <static>true</static>
+        <pose>-9.291666666666666 -4.675000000000001 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_0_cell_4_1">
+        <static>true</static>
+        <pose>-9.174999999999999 -4.675000000000001 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_0_cell_4_2">
+        <static>true</static>
+        <pose>-9.058333333333334 -4.675000000000001 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_0_cell_4_3">
+        <static>true</static>
+        <pose>-8.941666666666666 -4.675000000000001 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_0_cell_4_4">
+        <static>true</static>
+        <pose>-8.825 -4.675000000000001 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_0_cell_4_5">
+        <static>true</static>
+        <pose>-8.708333333333332 -4.675000000000001 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_0_cell_5_0">
+        <static>true</static>
+        <pose>-9.291666666666666 -4.791666666666667 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_0_cell_5_1">
+        <static>true</static>
+        <pose>-9.174999999999999 -4.791666666666667 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_0_cell_5_2">
+        <static>true</static>
+        <pose>-9.058333333333334 -4.791666666666667 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_0_cell_5_3">
+        <static>true</static>
+        <pose>-8.941666666666666 -4.791666666666667 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_0_cell_5_4">
+        <static>true</static>
+        <pose>-8.825 -4.791666666666667 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_0_cell_5_5">
+        <static>true</static>
+        <pose>-8.708333333333332 -4.791666666666667 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_1_white_board">
+        <static>true</static>
+        <pose>-3.0 1.5 0.015 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.9 0.9 0.004</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_1_cell_0_0">
+        <static>true</static>
+        <pose>-3.291666666666667 1.7916666666666667 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_1_cell_0_1">
+        <static>true</static>
+        <pose>-3.1750000000000003 1.7916666666666667 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_1_cell_0_2">
+        <static>true</static>
+        <pose>-3.0583333333333336 1.7916666666666667 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_1_cell_0_3">
+        <static>true</static>
+        <pose>-2.941666666666667 1.7916666666666667 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_1_cell_0_4">
+        <static>true</static>
+        <pose>-2.825 1.7916666666666667 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_1_cell_0_5">
+        <static>true</static>
+        <pose>-2.708333333333334 1.7916666666666667 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_1_cell_1_0">
+        <static>true</static>
+        <pose>-3.291666666666667 1.675 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_1_cell_1_1">
+        <static>true</static>
+        <pose>-3.1750000000000003 1.675 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_1_cell_1_2">
+        <static>true</static>
+        <pose>-3.0583333333333336 1.675 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_1_cell_1_3">
+        <static>true</static>
+        <pose>-2.941666666666667 1.675 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_1_cell_1_4">
+        <static>true</static>
+        <pose>-2.825 1.675 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_1_cell_1_5">
+        <static>true</static>
+        <pose>-2.708333333333334 1.675 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_1_cell_2_0">
+        <static>true</static>
+        <pose>-3.291666666666667 1.5583333333333333 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_1_cell_2_1">
+        <static>true</static>
+        <pose>-3.1750000000000003 1.5583333333333333 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_1_cell_2_2">
+        <static>true</static>
+        <pose>-3.0583333333333336 1.5583333333333333 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_1_cell_2_3">
+        <static>true</static>
+        <pose>-2.941666666666667 1.5583333333333333 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_1_cell_2_4">
+        <static>true</static>
+        <pose>-2.825 1.5583333333333333 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_1_cell_2_5">
+        <static>true</static>
+        <pose>-2.708333333333334 1.5583333333333333 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_1_cell_3_0">
+        <static>true</static>
+        <pose>-3.291666666666667 1.4416666666666669 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_1_cell_3_1">
+        <static>true</static>
+        <pose>-3.1750000000000003 1.4416666666666669 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_1_cell_3_2">
+        <static>true</static>
+        <pose>-3.0583333333333336 1.4416666666666669 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_1_cell_3_3">
+        <static>true</static>
+        <pose>-2.941666666666667 1.4416666666666669 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_1_cell_3_4">
+        <static>true</static>
+        <pose>-2.825 1.4416666666666669 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_1_cell_3_5">
+        <static>true</static>
+        <pose>-2.708333333333334 1.4416666666666669 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_1_cell_4_0">
+        <static>true</static>
+        <pose>-3.291666666666667 1.3250000000000002 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_1_cell_4_1">
+        <static>true</static>
+        <pose>-3.1750000000000003 1.3250000000000002 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_1_cell_4_2">
+        <static>true</static>
+        <pose>-3.0583333333333336 1.3250000000000002 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_1_cell_4_3">
+        <static>true</static>
+        <pose>-2.941666666666667 1.3250000000000002 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_1_cell_4_4">
+        <static>true</static>
+        <pose>-2.825 1.3250000000000002 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_1_cell_4_5">
+        <static>true</static>
+        <pose>-2.708333333333334 1.3250000000000002 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_1_cell_5_0">
+        <static>true</static>
+        <pose>-3.291666666666667 1.2083333333333335 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_1_cell_5_1">
+        <static>true</static>
+        <pose>-3.1750000000000003 1.2083333333333335 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_1_cell_5_2">
+        <static>true</static>
+        <pose>-3.0583333333333336 1.2083333333333335 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_1_cell_5_3">
+        <static>true</static>
+        <pose>-2.941666666666667 1.2083333333333335 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_1_cell_5_4">
+        <static>true</static>
+        <pose>-2.825 1.2083333333333335 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_1_cell_5_5">
+        <static>true</static>
+        <pose>-2.708333333333334 1.2083333333333335 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_2_white_board">
+        <static>true</static>
+        <pose>3.0 4.5 0.015 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.9 0.9 0.004</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_2_cell_0_0">
+        <static>true</static>
+        <pose>2.708333333333333 4.791666666666666 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_2_cell_0_1">
+        <static>true</static>
+        <pose>2.8249999999999997 4.791666666666666 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_2_cell_0_2">
+        <static>true</static>
+        <pose>2.9416666666666664 4.791666666666666 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_2_cell_0_3">
+        <static>true</static>
+        <pose>3.058333333333333 4.791666666666666 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_2_cell_0_4">
+        <static>true</static>
+        <pose>3.175 4.791666666666666 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_2_cell_0_5">
+        <static>true</static>
+        <pose>3.291666666666666 4.791666666666666 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_2_cell_1_0">
+        <static>true</static>
+        <pose>2.708333333333333 4.675 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_2_cell_1_1">
+        <static>true</static>
+        <pose>2.8249999999999997 4.675 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_2_cell_1_2">
+        <static>true</static>
+        <pose>2.9416666666666664 4.675 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_2_cell_1_3">
+        <static>true</static>
+        <pose>3.058333333333333 4.675 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_2_cell_1_4">
+        <static>true</static>
+        <pose>3.175 4.675 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_2_cell_1_5">
+        <static>true</static>
+        <pose>3.291666666666666 4.675 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_2_cell_2_0">
+        <static>true</static>
+        <pose>2.708333333333333 4.558333333333333 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_2_cell_2_1">
+        <static>true</static>
+        <pose>2.8249999999999997 4.558333333333333 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_2_cell_2_2">
+        <static>true</static>
+        <pose>2.9416666666666664 4.558333333333333 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_2_cell_2_3">
+        <static>true</static>
+        <pose>3.058333333333333 4.558333333333333 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_2_cell_2_4">
+        <static>true</static>
+        <pose>3.175 4.558333333333333 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_2_cell_2_5">
+        <static>true</static>
+        <pose>3.291666666666666 4.558333333333333 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_2_cell_3_0">
+        <static>true</static>
+        <pose>2.708333333333333 4.441666666666666 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_2_cell_3_1">
+        <static>true</static>
+        <pose>2.8249999999999997 4.441666666666666 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_2_cell_3_2">
+        <static>true</static>
+        <pose>2.9416666666666664 4.441666666666666 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_2_cell_3_3">
+        <static>true</static>
+        <pose>3.058333333333333 4.441666666666666 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_2_cell_3_4">
+        <static>true</static>
+        <pose>3.175 4.441666666666666 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_2_cell_3_5">
+        <static>true</static>
+        <pose>3.291666666666666 4.441666666666666 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_2_cell_4_0">
+        <static>true</static>
+        <pose>2.708333333333333 4.324999999999999 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_2_cell_4_1">
+        <static>true</static>
+        <pose>2.8249999999999997 4.324999999999999 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_2_cell_4_2">
+        <static>true</static>
+        <pose>2.9416666666666664 4.324999999999999 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_2_cell_4_3">
+        <static>true</static>
+        <pose>3.058333333333333 4.324999999999999 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_2_cell_4_4">
+        <static>true</static>
+        <pose>3.175 4.324999999999999 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_2_cell_4_5">
+        <static>true</static>
+        <pose>3.291666666666666 4.324999999999999 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_2_cell_5_0">
+        <static>true</static>
+        <pose>2.708333333333333 4.208333333333333 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_2_cell_5_1">
+        <static>true</static>
+        <pose>2.8249999999999997 4.208333333333333 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_2_cell_5_2">
+        <static>true</static>
+        <pose>2.9416666666666664 4.208333333333333 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_2_cell_5_3">
+        <static>true</static>
+        <pose>3.058333333333333 4.208333333333333 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_2_cell_5_4">
+        <static>true</static>
+        <pose>3.175 4.208333333333333 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_2_cell_5_5">
+        <static>true</static>
+        <pose>3.291666666666666 4.208333333333333 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_3_white_board">
+        <static>true</static>
+        <pose>9.0 -1.5 0.015 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.9 0.9 0.004</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_3_cell_0_0">
+        <static>true</static>
+        <pose>8.708333333333334 -1.2083333333333333 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_3_cell_0_1">
+        <static>true</static>
+        <pose>8.825000000000001 -1.2083333333333333 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_3_cell_0_2">
+        <static>true</static>
+        <pose>8.941666666666666 -1.2083333333333333 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_3_cell_0_3">
+        <static>true</static>
+        <pose>9.058333333333334 -1.2083333333333333 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_3_cell_0_4">
+        <static>true</static>
+        <pose>9.175 -1.2083333333333333 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_3_cell_0_5">
+        <static>true</static>
+        <pose>9.291666666666668 -1.2083333333333333 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_3_cell_1_0">
+        <static>true</static>
+        <pose>8.708333333333334 -1.325 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_3_cell_1_1">
+        <static>true</static>
+        <pose>8.825000000000001 -1.325 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_3_cell_1_2">
+        <static>true</static>
+        <pose>8.941666666666666 -1.325 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_3_cell_1_3">
+        <static>true</static>
+        <pose>9.058333333333334 -1.325 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_3_cell_1_4">
+        <static>true</static>
+        <pose>9.175 -1.325 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_3_cell_1_5">
+        <static>true</static>
+        <pose>9.291666666666668 -1.325 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_3_cell_2_0">
+        <static>true</static>
+        <pose>8.708333333333334 -1.4416666666666667 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_3_cell_2_1">
+        <static>true</static>
+        <pose>8.825000000000001 -1.4416666666666667 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_3_cell_2_2">
+        <static>true</static>
+        <pose>8.941666666666666 -1.4416666666666667 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_3_cell_2_3">
+        <static>true</static>
+        <pose>9.058333333333334 -1.4416666666666667 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_3_cell_2_4">
+        <static>true</static>
+        <pose>9.175 -1.4416666666666667 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_3_cell_2_5">
+        <static>true</static>
+        <pose>9.291666666666668 -1.4416666666666667 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_3_cell_3_0">
+        <static>true</static>
+        <pose>8.708333333333334 -1.5583333333333331 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_3_cell_3_1">
+        <static>true</static>
+        <pose>8.825000000000001 -1.5583333333333331 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_3_cell_3_2">
+        <static>true</static>
+        <pose>8.941666666666666 -1.5583333333333331 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_3_cell_3_3">
+        <static>true</static>
+        <pose>9.058333333333334 -1.5583333333333331 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_3_cell_3_4">
+        <static>true</static>
+        <pose>9.175 -1.5583333333333331 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_3_cell_3_5">
+        <static>true</static>
+        <pose>9.291666666666668 -1.5583333333333331 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_3_cell_4_0">
+        <static>true</static>
+        <pose>8.708333333333334 -1.6749999999999998 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_3_cell_4_1">
+        <static>true</static>
+        <pose>8.825000000000001 -1.6749999999999998 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_3_cell_4_2">
+        <static>true</static>
+        <pose>8.941666666666666 -1.6749999999999998 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_3_cell_4_3">
+        <static>true</static>
+        <pose>9.058333333333334 -1.6749999999999998 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_3_cell_4_4">
+        <static>true</static>
+        <pose>9.175 -1.6749999999999998 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_3_cell_4_5">
+        <static>true</static>
+        <pose>9.291666666666668 -1.6749999999999998 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_3_cell_5_0">
+        <static>true</static>
+        <pose>8.708333333333334 -1.7916666666666665 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_3_cell_5_1">
+        <static>true</static>
+        <pose>8.825000000000001 -1.7916666666666665 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_3_cell_5_2">
+        <static>true</static>
+        <pose>8.941666666666666 -1.7916666666666665 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_3_cell_5_3">
+        <static>true</static>
+        <pose>9.058333333333334 -1.7916666666666665 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_3_cell_5_4">
+        <static>true</static>
+        <pose>9.175 -1.7916666666666665 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="aruco_3_cell_5_5">
+        <static>true</static>
+        <pose>9.291666666666668 -1.7916666666666665 0.018 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.11666666666666665 0.11666666666666665 0.002</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_base">
+        <static>true</static>
+        <pose>-13.5 7.5 0.35 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><cylinder><radius>1.5</radius><length>0.7</length></cylinder></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        <collision name="collision">
+            <geometry><cylinder><radius>1.5</radius><length>0.7</length></cylinder></geometry>
+        </collision>
+        
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_0">
+        <static>true</static>
+        <pose>-12.15 7.5 0.701 0 0 1.5707963267948966</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_1">
+        <static>true</static>
+        <pose>-12.152890453627885 7.588294224460693 0.701 0 0 1.6362461737446838</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_2">
+        <static>true</static>
+        <pose>-12.161549437145355 7.67621035949707 0.701 0 0 1.7016960206944713</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_3">
+        <static>true</static>
+        <pose>-12.17593987145564 7.763371934721773 0.701 0 0 1.7671458676442586</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_4">
+        <static>true</static>
+        <pose>-12.196000134509758 7.849405710888403 0.701 0 0 1.832595714594046</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_5">
+        <static>true</static>
+        <pose>-12.221644325181607 7.933943278159268 0.701 0 0 1.8980455615438334</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_6">
+        <static>true</static>
+        <pose>-12.252762631109762 8.01662263369287 0.701 0 0 1.9634954084936207</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_7">
+        <static>true</static>
+        <pose>-12.289221798930871 8.097089731795652 0.701 0 0 2.028945255443408</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_8">
+        <static>true</static>
+        <pose>-12.330865704891007 8.175 0.701 0 0 2.0943951023931953</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_9">
+        <static>true</static>
+        <pose>-12.377516023391564 8.250019814576463 0.701 0 0 2.1598449493429825</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_10">
+        <static>true</static>
+        <pose>-12.428972990606832 8.321827929161772 0.701 0 0 2.2252947962927703</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_11">
+        <static>true</static>
+        <pose>-12.48501625990338 8.390116850385093 0.701 0 0 2.2907446432425576</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_12">
+        <static>true</static>
+        <pose>-12.545405845398161 8.454594154601839 0.701 0 0 2.356194490192345</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_13">
+        <static>true</static>
+        <pose>-12.609883149614907 8.51498374009662 0.701 0 0 2.421644337142132</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_14">
+        <static>true</static>
+        <pose>-12.678172070838228 8.571027009393168 0.701 0 0 2.4870941840919194</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_15">
+        <static>true</static>
+        <pose>-12.749980185423537 8.622483976608436 0.701 0 0 2.5525440310417067</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_16">
+        <static>true</static>
+        <pose>-12.825 8.669134295108993 0.701 0 0 2.617993877991494</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_17">
+        <static>true</static>
+        <pose>-12.902910268204348 8.710778201069129 0.701 0 0 2.6834437249412817</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_18">
+        <static>true</static>
+        <pose>-12.98337736630713 8.747237368890238 0.701 0 0 2.748893571891069</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_19">
+        <static>true</static>
+        <pose>-13.06605672184073 8.778355674818393 0.701 0 0 2.8143434188408563</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_20">
+        <static>true</static>
+        <pose>-13.150594289111597 8.803999865490242 0.701 0 0 2.8797932657906435</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_21">
+        <static>true</static>
+        <pose>-13.236628065278227 8.82406012854436 0.701 0 0 2.945243112740431</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_22">
+        <static>true</static>
+        <pose>-13.32378964050293 8.838450562854645 0.701 0 0 3.0106929596902186</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_23">
+        <static>true</static>
+        <pose>-13.411705775539307 8.847109546372115 0.701 0 0 3.0761428066400054</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_24">
+        <static>true</static>
+        <pose>-13.5 8.85 0.701 0 0 3.141592653589793</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_25">
+        <static>true</static>
+        <pose>-13.588294224460693 8.847109546372115 0.701 0 0 3.2070425005395804</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_26">
+        <static>true</static>
+        <pose>-13.67621035949707 8.838450562854645 0.701 0 0 3.2724923474893677</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_27">
+        <static>true</static>
+        <pose>-13.763371934721773 8.824060128544362 0.701 0 0 3.337942194439155</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_28">
+        <static>true</static>
+        <pose>-13.849405710888403 8.803999865490242 0.701 0 0 3.4033920413889422</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_29">
+        <static>true</static>
+        <pose>-13.933943278159267 8.778355674818393 0.701 0 0 3.46884188833873</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_30">
+        <static>true</static>
+        <pose>-14.01662263369287 8.747237368890238 0.701 0 0 3.534291735288517</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_31">
+        <static>true</static>
+        <pose>-14.097089731795652 8.710778201069129 0.701 0 0 3.5997415822383045</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_32">
+        <static>true</static>
+        <pose>-14.174999999999999 8.669134295108993 0.701 0 0 3.665191429188092</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_33">
+        <static>true</static>
+        <pose>-14.250019814576463 8.622483976608436 0.701 0 0 3.730641276137879</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_34">
+        <static>true</static>
+        <pose>-14.321827929161772 8.571027009393168 0.701 0 0 3.7960911230876664</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_35">
+        <static>true</static>
+        <pose>-14.390116850385093 8.51498374009662 0.701 0 0 3.8615409700374537</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_36">
+        <static>true</static>
+        <pose>-14.454594154601839 8.454594154601839 0.701 0 0 3.9269908169872414</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_37">
+        <static>true</static>
+        <pose>-14.51498374009662 8.390116850385093 0.701 0 0 3.9924406639370287</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_38">
+        <static>true</static>
+        <pose>-14.571027009393168 8.321827929161774 0.701 0 0 4.057890510886816</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_39">
+        <static>true</static>
+        <pose>-14.622483976608436 8.250019814576463 0.701 0 0 4.123340357836604</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_40">
+        <static>true</static>
+        <pose>-14.669134295108993 8.175 0.701 0 0 4.1887902047863905</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_41">
+        <static>true</static>
+        <pose>-14.710778201069129 8.097089731795652 0.701 0 0 4.254240051736177</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_42">
+        <static>true</static>
+        <pose>-14.747237368890238 8.016622633692872 0.701 0 0 4.319689898685965</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_43">
+        <static>true</static>
+        <pose>-14.778355674818393 7.933943278159268 0.701 0 0 4.385139745635753</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_44">
+        <static>true</static>
+        <pose>-14.803999865490242 7.849405710888403 0.701 0 0 4.4505895925855405</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_45">
+        <static>true</static>
+        <pose>-14.82406012854436 7.763371934721774 0.701 0 0 4.516039439535327</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_46">
+        <static>true</static>
+        <pose>-14.838450562854645 7.6762103594970705 0.701 0 0 4.581489286485114</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_47">
+        <static>true</static>
+        <pose>-14.847109546372115 7.588294224460694 0.701 0 0 4.646939133434902</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_48">
+        <static>true</static>
+        <pose>-14.85 7.5 0.701 0 0 4.71238898038469</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_49">
+        <static>true</static>
+        <pose>-14.847109546372115 7.411705775539307 0.701 0 0 4.777838827334477</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_50">
+        <static>true</static>
+        <pose>-14.838450562854645 7.32378964050293 0.701 0 0 4.843288674284264</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_51">
+        <static>true</static>
+        <pose>-14.824060128544362 7.236628065278227 0.701 0 0 4.908738521234051</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_52">
+        <static>true</static>
+        <pose>-14.803999865490242 7.150594289111598 0.701 0 0 4.974188368183839</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_53">
+        <static>true</static>
+        <pose>-14.778355674818393 7.066056721840733 0.701 0 0 5.0396382151336265</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_54">
+        <static>true</static>
+        <pose>-14.747237368890238 6.9833773663071295 0.701 0 0 5.105088062083413</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_55">
+        <static>true</static>
+        <pose>-14.710778201069129 6.902910268204349 0.701 0 0 5.170537909033201</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_56">
+        <static>true</static>
+        <pose>-14.669134295108993 6.825 0.701 0 0 5.235987755982988</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_57">
+        <static>true</static>
+        <pose>-14.622483976608436 6.749980185423537 0.701 0 0 5.301437602932776</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_58">
+        <static>true</static>
+        <pose>-14.571027009393168 6.678172070838228 0.701 0 0 5.366887449882563</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_59">
+        <static>true</static>
+        <pose>-14.51498374009662 6.609883149614907 0.701 0 0 5.43233729683235</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_60">
+        <static>true</static>
+        <pose>-14.454594154601839 6.545405845398161 0.701 0 0 5.497787143782137</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_61">
+        <static>true</static>
+        <pose>-14.390116850385093 6.4850162599033805 0.701 0 0 5.563236990731925</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_62">
+        <static>true</static>
+        <pose>-14.321827929161774 6.428972990606833 0.701 0 0 5.6286868376817125</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_63">
+        <static>true</static>
+        <pose>-14.250019814576465 6.377516023391564 0.701 0 0 5.694136684631499</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_64">
+        <static>true</static>
+        <pose>-14.175 6.330865704891008 0.701 0 0 5.759586531581287</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_65">
+        <static>true</static>
+        <pose>-14.097089731795652 6.289221798930871 0.701 0 0 5.825036378531075</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_66">
+        <static>true</static>
+        <pose>-14.016622633692872 6.252762631109763 0.701 0 0 5.890486225480862</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_67">
+        <static>true</static>
+        <pose>-13.93394327815927 6.221644325181607 0.701 0 0 5.955936072430649</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_68">
+        <static>true</static>
+        <pose>-13.849405710888403 6.196000134509758 0.701 0 0 6.021385919380436</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_69">
+        <static>true</static>
+        <pose>-13.763371934721773 6.175939871455639 0.701 0 0 6.086835766330224</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_70">
+        <static>true</static>
+        <pose>-13.676210359497071 6.161549437145356 0.701 0 0 6.152285613280011</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_71">
+        <static>true</static>
+        <pose>-13.588294224460693 6.152890453627885 0.701 0 0 6.2177354602297985</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_72">
+        <static>true</static>
+        <pose>-13.5 6.15 0.701 0 0 6.283185307179586</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_73">
+        <static>true</static>
+        <pose>-13.411705775539307 6.152890453627885 0.701 0 0 6.348635154129373</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_74">
+        <static>true</static>
+        <pose>-13.32378964050293 6.161549437145355 0.701 0 0 6.414085001079161</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_75">
+        <static>true</static>
+        <pose>-13.236628065278229 6.175939871455639 0.701 0 0 6.479534848028948</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_76">
+        <static>true</static>
+        <pose>-13.150594289111597 6.196000134509758 0.701 0 0 6.544984694978735</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_77">
+        <static>true</static>
+        <pose>-13.066056721840733 6.221644325181607 0.701 0 0 6.610434541928523</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_78">
+        <static>true</static>
+        <pose>-12.98337736630713 6.252762631109762 0.701 0 0 6.67588438887831</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_79">
+        <static>true</static>
+        <pose>-12.902910268204348 6.28922179893087 0.701 0 0 6.741334235828098</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_80">
+        <static>true</static>
+        <pose>-12.825000000000001 6.330865704891007 0.701 0 0 6.8067840827778845</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_81">
+        <static>true</static>
+        <pose>-12.749980185423537 6.377516023391563 0.701 0 0 6.872233929727672</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_82">
+        <static>true</static>
+        <pose>-12.678172070838228 6.428972990606832 0.701 0 0 6.937683776677459</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_83">
+        <static>true</static>
+        <pose>-12.609883149614907 6.48501625990338 0.701 0 0 7.003133623627247</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_84">
+        <static>true</static>
+        <pose>-12.545405845398161 6.545405845398161 0.701 0 0 7.0685834705770345</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_85">
+        <static>true</static>
+        <pose>-12.48501625990338 6.609883149614906 0.701 0 0 7.134033317526821</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_86">
+        <static>true</static>
+        <pose>-12.428972990606832 6.678172070838227 0.701 0 0 7.199483164476609</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_87">
+        <static>true</static>
+        <pose>-12.377516023391564 6.749980185423536 0.701 0 0 7.264933011426396</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_88">
+        <static>true</static>
+        <pose>-12.330865704891009 6.824999999999999 0.701 0 0 7.330382858376184</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_89">
+        <static>true</static>
+        <pose>-12.289221798930871 6.902910268204347 0.701 0 0 7.3958327053259705</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_90">
+        <static>true</static>
+        <pose>-12.252762631109762 6.983377366307128 0.701 0 0 7.461282552275758</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_91">
+        <static>true</static>
+        <pose>-12.221644325181607 7.066056721840732 0.701 0 0 7.526732399225546</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_92">
+        <static>true</static>
+        <pose>-12.196000134509758 7.150594289111596 0.701 0 0 7.592182246175333</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_93">
+        <static>true</static>
+        <pose>-12.17593987145564 7.236628065278226 0.701 0 0 7.6576320931251205</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_94">
+        <static>true</static>
+        <pose>-12.161549437145355 7.323789640502929 0.701 0 0 7.723081940074907</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_black_outer_ring_95">
+        <static>true</static>
+        <pose>-12.152890453627885 7.411705775539306 0.701 0 0 7.788531787024695</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08835729338221293 0.08 0.015</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_0">
+        <static>true</static>
+        <pose>-12.5 7.5 0.703 0 0 1.5707963267948966</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_1">
+        <static>true</static>
+        <pose>-12.502141076761397 7.565403129230143 0.703 0 0 1.6362461737446838</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_2">
+        <static>true</static>
+        <pose>-12.508555138626189 7.630526192220051 0.703 0 0 1.7016960206944713</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_3">
+        <static>true</static>
+        <pose>-12.51921471959677 7.695090322016128 0.703 0 0 1.7671458676442586</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_4">
+        <static>true</static>
+        <pose>-12.534074173710932 7.758819045102521 0.703 0 0 1.832595714594046</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_5">
+        <static>true</static>
+        <pose>-12.553069870504894 7.821439465303161 0.703 0 0 1.8980455615438334</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_6">
+        <static>true</static>
+        <pose>-12.576120467488714 7.88268343236509 0.703 0 0 1.9634954084936207</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_7">
+        <static>true</static>
+        <pose>-12.603127258467312 7.9422886902190015 0.703 0 0 2.028945255443408</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_8">
+        <static>true</static>
+        <pose>-12.63397459621556 8.0 0.703 0 0 2.0943951023931953</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_9">
+        <static>true</static>
+        <pose>-12.668530387697455 8.055570233019601 0.703 0 0 2.1598449493429825</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_10">
+        <static>true</static>
+        <pose>-12.706646659708765 8.108761429008721 0.703 0 0 2.2252947962927703</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_11">
+        <static>true</static>
+        <pose>-12.748160192521024 8.15934581510007 0.703 0 0 2.2907446432425576</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_12">
+        <static>true</static>
+        <pose>-12.792893218813452 8.207106781186548 0.703 0 0 2.356194490192345</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_13">
+        <static>true</static>
+        <pose>-12.84065418489993 8.251839807478976 0.703 0 0 2.421644337142132</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_14">
+        <static>true</static>
+        <pose>-12.891238570991279 8.293353340291235 0.703 0 0 2.4870941840919194</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_15">
+        <static>true</static>
+        <pose>-12.944429766980397 8.331469612302545 0.703 0 0 2.5525440310417067</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_16">
+        <static>true</static>
+        <pose>-13.0 8.36602540378444 0.703 0 0 2.617993877991494</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_17">
+        <static>true</static>
+        <pose>-13.057711309780998 8.396872741532688 0.703 0 0 2.6834437249412817</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_18">
+        <static>true</static>
+        <pose>-13.11731656763491 8.423879532511286 0.703 0 0 2.748893571891069</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_19">
+        <static>true</static>
+        <pose>-13.178560534696839 8.446930129495106 0.703 0 0 2.8143434188408563</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_20">
+        <static>true</static>
+        <pose>-13.241180954897478 8.465925826289068 0.703 0 0 2.8797932657906435</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_21">
+        <static>true</static>
+        <pose>-13.304909677983872 8.48078528040323 0.703 0 0 2.945243112740431</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_22">
+        <static>true</static>
+        <pose>-13.369473807779949 8.491444861373811 0.703 0 0 3.0106929596902186</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_23">
+        <static>true</static>
+        <pose>-13.434596870769857 8.497858923238603 0.703 0 0 3.0761428066400054</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_24">
+        <static>true</static>
+        <pose>-13.5 8.5 0.703 0 0 3.141592653589793</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_25">
+        <static>true</static>
+        <pose>-13.565403129230143 8.497858923238603 0.703 0 0 3.2070425005395804</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_26">
+        <static>true</static>
+        <pose>-13.630526192220051 8.491444861373811 0.703 0 0 3.2724923474893677</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_27">
+        <static>true</static>
+        <pose>-13.695090322016128 8.48078528040323 0.703 0 0 3.337942194439155</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_28">
+        <static>true</static>
+        <pose>-13.75881904510252 8.465925826289068 0.703 0 0 3.4033920413889422</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_29">
+        <static>true</static>
+        <pose>-13.821439465303161 8.446930129495106 0.703 0 0 3.46884188833873</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_30">
+        <static>true</static>
+        <pose>-13.88268343236509 8.423879532511286 0.703 0 0 3.534291735288517</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_31">
+        <static>true</static>
+        <pose>-13.942288690219002 8.396872741532688 0.703 0 0 3.5997415822383045</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_32">
+        <static>true</static>
+        <pose>-14.0 8.36602540378444 0.703 0 0 3.665191429188092</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_33">
+        <static>true</static>
+        <pose>-14.055570233019601 8.331469612302545 0.703 0 0 3.730641276137879</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_34">
+        <static>true</static>
+        <pose>-14.10876142900872 8.293353340291235 0.703 0 0 3.7960911230876664</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_35">
+        <static>true</static>
+        <pose>-14.15934581510007 8.251839807478978 0.703 0 0 3.8615409700374537</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_36">
+        <static>true</static>
+        <pose>-14.207106781186548 8.207106781186548 0.703 0 0 3.9269908169872414</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_37">
+        <static>true</static>
+        <pose>-14.251839807478976 8.15934581510007 0.703 0 0 3.9924406639370287</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_38">
+        <static>true</static>
+        <pose>-14.293353340291235 8.108761429008721 0.703 0 0 4.057890510886816</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_39">
+        <static>true</static>
+        <pose>-14.331469612302545 8.055570233019603 0.703 0 0 4.123340357836604</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_40">
+        <static>true</static>
+        <pose>-14.36602540378444 8.0 0.703 0 0 4.1887902047863905</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_41">
+        <static>true</static>
+        <pose>-14.396872741532688 7.9422886902190015 0.703 0 0 4.254240051736177</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_42">
+        <static>true</static>
+        <pose>-14.423879532511286 7.88268343236509 0.703 0 0 4.319689898685965</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_43">
+        <static>true</static>
+        <pose>-14.446930129495106 7.821439465303162 0.703 0 0 4.385139745635753</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_44">
+        <static>true</static>
+        <pose>-14.465925826289068 7.758819045102521 0.703 0 0 4.4505895925855405</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_45">
+        <static>true</static>
+        <pose>-14.48078528040323 7.695090322016129 0.703 0 0 4.516039439535327</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_46">
+        <static>true</static>
+        <pose>-14.491444861373811 7.630526192220052 0.703 0 0 4.581489286485114</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_47">
+        <static>true</static>
+        <pose>-14.497858923238603 7.565403129230144 0.703 0 0 4.646939133434902</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_48">
+        <static>true</static>
+        <pose>-14.5 7.5 0.703 0 0 4.71238898038469</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_49">
+        <static>true</static>
+        <pose>-14.497858923238603 7.434596870769857 0.703 0 0 4.777838827334477</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_50">
+        <static>true</static>
+        <pose>-14.491444861373811 7.369473807779949 0.703 0 0 4.843288674284264</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_51">
+        <static>true</static>
+        <pose>-14.48078528040323 7.304909677983872 0.703 0 0 4.908738521234051</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_52">
+        <static>true</static>
+        <pose>-14.465925826289068 7.241180954897479 0.703 0 0 4.974188368183839</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_53">
+        <static>true</static>
+        <pose>-14.446930129495106 7.178560534696839 0.703 0 0 5.0396382151336265</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_54">
+        <static>true</static>
+        <pose>-14.423879532511286 7.11731656763491 0.703 0 0 5.105088062083413</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_55">
+        <static>true</static>
+        <pose>-14.396872741532688 7.0577113097809985 0.703 0 0 5.170537909033201</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_56">
+        <static>true</static>
+        <pose>-14.36602540378444 7.0 0.703 0 0 5.235987755982988</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_57">
+        <static>true</static>
+        <pose>-14.331469612302545 6.944429766980398 0.703 0 0 5.301437602932776</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_58">
+        <static>true</static>
+        <pose>-14.293353340291235 6.89123857099128 0.703 0 0 5.366887449882563</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_59">
+        <static>true</static>
+        <pose>-14.251839807478978 6.840654184899932 0.703 0 0 5.43233729683235</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_60">
+        <static>true</static>
+        <pose>-14.207106781186548 6.792893218813453 0.703 0 0 5.497787143782137</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_61">
+        <static>true</static>
+        <pose>-14.15934581510007 6.748160192521023 0.703 0 0 5.563236990731925</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_62">
+        <static>true</static>
+        <pose>-14.108761429008721 6.706646659708765 0.703 0 0 5.6286868376817125</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_63">
+        <static>true</static>
+        <pose>-14.055570233019603 6.668530387697455 0.703 0 0 5.694136684631499</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_64">
+        <static>true</static>
+        <pose>-14.0 6.633974596215562 0.703 0 0 5.759586531581287</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_65">
+        <static>true</static>
+        <pose>-13.942288690219002 6.603127258467312 0.703 0 0 5.825036378531075</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_66">
+        <static>true</static>
+        <pose>-13.88268343236509 6.576120467488714 0.703 0 0 5.890486225480862</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_67">
+        <static>true</static>
+        <pose>-13.821439465303161 6.553069870504895 0.703 0 0 5.955936072430649</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_68">
+        <static>true</static>
+        <pose>-13.758819045102522 6.534074173710932 0.703 0 0 6.021385919380436</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_69">
+        <static>true</static>
+        <pose>-13.695090322016128 6.51921471959677 0.703 0 0 6.086835766330224</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_70">
+        <static>true</static>
+        <pose>-13.630526192220053 6.50855513862619 0.703 0 0 6.152285613280011</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_71">
+        <static>true</static>
+        <pose>-13.565403129230143 6.502141076761396 0.703 0 0 6.2177354602297985</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_72">
+        <static>true</static>
+        <pose>-13.5 6.5 0.703 0 0 6.283185307179586</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_73">
+        <static>true</static>
+        <pose>-13.434596870769857 6.502141076761396 0.703 0 0 6.348635154129373</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_74">
+        <static>true</static>
+        <pose>-13.369473807779949 6.508555138626189 0.703 0 0 6.414085001079161</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_75">
+        <static>true</static>
+        <pose>-13.304909677983872 6.51921471959677 0.703 0 0 6.479534848028948</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_76">
+        <static>true</static>
+        <pose>-13.24118095489748 6.534074173710931 0.703 0 0 6.544984694978735</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_77">
+        <static>true</static>
+        <pose>-13.178560534696839 6.553069870504895 0.703 0 0 6.610434541928523</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_78">
+        <static>true</static>
+        <pose>-13.11731656763491 6.576120467488713 0.703 0 0 6.67588438887831</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_79">
+        <static>true</static>
+        <pose>-13.057711309780998 6.603127258467311 0.703 0 0 6.741334235828098</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_80">
+        <static>true</static>
+        <pose>-13.0 6.633974596215561 0.703 0 0 6.8067840827778845</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_81">
+        <static>true</static>
+        <pose>-12.944429766980399 6.668530387697454 0.703 0 0 6.872233929727672</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_82">
+        <static>true</static>
+        <pose>-12.89123857099128 6.706646659708764 0.703 0 0 6.937683776677459</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_83">
+        <static>true</static>
+        <pose>-12.840654184899932 6.748160192521022 0.703 0 0 7.003133623627247</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_84">
+        <static>true</static>
+        <pose>-12.792893218813452 6.792893218813452 0.703 0 0 7.0685834705770345</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_85">
+        <static>true</static>
+        <pose>-12.748160192521024 6.840654184899931 0.703 0 0 7.134033317526821</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_86">
+        <static>true</static>
+        <pose>-12.706646659708765 6.891238570991279 0.703 0 0 7.199483164476609</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_87">
+        <static>true</static>
+        <pose>-12.668530387697455 6.944429766980397 0.703 0 0 7.264933011426396</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_88">
+        <static>true</static>
+        <pose>-12.633974596215563 7.0 0.703 0 0 7.330382858376184</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_89">
+        <static>true</static>
+        <pose>-12.603127258467312 7.057711309780998 0.703 0 0 7.3958327053259705</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_90">
+        <static>true</static>
+        <pose>-12.576120467488714 7.1173165676349095 0.703 0 0 7.461282552275758</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_91">
+        <static>true</static>
+        <pose>-12.553069870504894 7.178560534696838 0.703 0 0 7.526732399225546</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_92">
+        <static>true</static>
+        <pose>-12.534074173710932 7.241180954897478 0.703 0 0 7.592182246175333</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_93">
+        <static>true</static>
+        <pose>-12.51921471959677 7.304909677983871 0.703 0 0 7.6576320931251205</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_94">
+        <static>true</static>
+        <pose>-12.508555138626189 7.369473807779947 0.703 0 0 7.723081940074907</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_red_safety_ring_95">
+        <static>true</static>
+        <pose>-12.502141076761397 7.434596870769856 0.703 0 0 7.788531787024695</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.06544984694978735 0.06 0.015</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_v_left">
+        <static>true</static>
+        <pose>-13.55 7.18 0.706 0 0 1.2208</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.12 1.45 0.005</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_v_right">
+        <static>true</static>
+        <pose>-13.55 7.82 0.706 0 0 1.9208</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.12 1.45 0.005</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_center_marker_white_board">
+        <static>true</static>
+        <pose>-13.5 7.5 0.702 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.62 0.62 0.002</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_marker_cell_0_0">
+        <static>true</static>
+        <pose>-13.708333333333334 7.708333333333333 0.704 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08333333333333333 0.08333333333333333 0.003</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_marker_cell_0_1">
+        <static>true</static>
+        <pose>-13.625 7.708333333333333 0.704 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08333333333333333 0.08333333333333333 0.003</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_marker_cell_0_2">
+        <static>true</static>
+        <pose>-13.541666666666668 7.708333333333333 0.704 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08333333333333333 0.08333333333333333 0.003</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_marker_cell_0_3">
+        <static>true</static>
+        <pose>-13.458333333333334 7.708333333333333 0.704 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08333333333333333 0.08333333333333333 0.003</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_marker_cell_0_4">
+        <static>true</static>
+        <pose>-13.375 7.708333333333333 0.704 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08333333333333333 0.08333333333333333 0.003</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_marker_cell_0_5">
+        <static>true</static>
+        <pose>-13.291666666666668 7.708333333333333 0.704 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08333333333333333 0.08333333333333333 0.003</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_marker_cell_1_0">
+        <static>true</static>
+        <pose>-13.708333333333334 7.625 0.704 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08333333333333333 0.08333333333333333 0.003</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_marker_cell_1_1">
+        <static>true</static>
+        <pose>-13.625 7.625 0.704 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08333333333333333 0.08333333333333333 0.003</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_marker_cell_1_2">
+        <static>true</static>
+        <pose>-13.541666666666668 7.625 0.704 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08333333333333333 0.08333333333333333 0.003</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_marker_cell_1_3">
+        <static>true</static>
+        <pose>-13.458333333333334 7.625 0.704 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08333333333333333 0.08333333333333333 0.003</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_marker_cell_1_4">
+        <static>true</static>
+        <pose>-13.375 7.625 0.704 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08333333333333333 0.08333333333333333 0.003</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_marker_cell_1_5">
+        <static>true</static>
+        <pose>-13.291666666666668 7.625 0.704 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08333333333333333 0.08333333333333333 0.003</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_marker_cell_2_0">
+        <static>true</static>
+        <pose>-13.708333333333334 7.541666666666666 0.704 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08333333333333333 0.08333333333333333 0.003</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_marker_cell_2_1">
+        <static>true</static>
+        <pose>-13.625 7.541666666666666 0.704 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08333333333333333 0.08333333333333333 0.003</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_marker_cell_2_2">
+        <static>true</static>
+        <pose>-13.541666666666668 7.541666666666666 0.704 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08333333333333333 0.08333333333333333 0.003</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_marker_cell_2_3">
+        <static>true</static>
+        <pose>-13.458333333333334 7.541666666666666 0.704 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08333333333333333 0.08333333333333333 0.003</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_marker_cell_2_4">
+        <static>true</static>
+        <pose>-13.375 7.541666666666666 0.704 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08333333333333333 0.08333333333333333 0.003</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_marker_cell_2_5">
+        <static>true</static>
+        <pose>-13.291666666666668 7.541666666666666 0.704 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08333333333333333 0.08333333333333333 0.003</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_marker_cell_3_0">
+        <static>true</static>
+        <pose>-13.708333333333334 7.458333333333333 0.704 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08333333333333333 0.08333333333333333 0.003</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_marker_cell_3_1">
+        <static>true</static>
+        <pose>-13.625 7.458333333333333 0.704 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08333333333333333 0.08333333333333333 0.003</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_marker_cell_3_2">
+        <static>true</static>
+        <pose>-13.541666666666668 7.458333333333333 0.704 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08333333333333333 0.08333333333333333 0.003</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_marker_cell_3_3">
+        <static>true</static>
+        <pose>-13.458333333333334 7.458333333333333 0.704 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08333333333333333 0.08333333333333333 0.003</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_marker_cell_3_4">
+        <static>true</static>
+        <pose>-13.375 7.458333333333333 0.704 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08333333333333333 0.08333333333333333 0.003</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_marker_cell_3_5">
+        <static>true</static>
+        <pose>-13.291666666666668 7.458333333333333 0.704 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08333333333333333 0.08333333333333333 0.003</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_marker_cell_4_0">
+        <static>true</static>
+        <pose>-13.708333333333334 7.375 0.704 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08333333333333333 0.08333333333333333 0.003</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_marker_cell_4_1">
+        <static>true</static>
+        <pose>-13.625 7.375 0.704 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08333333333333333 0.08333333333333333 0.003</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_marker_cell_4_2">
+        <static>true</static>
+        <pose>-13.541666666666668 7.375 0.704 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08333333333333333 0.08333333333333333 0.003</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_marker_cell_4_3">
+        <static>true</static>
+        <pose>-13.458333333333334 7.375 0.704 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08333333333333333 0.08333333333333333 0.003</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_marker_cell_4_4">
+        <static>true</static>
+        <pose>-13.375 7.375 0.704 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08333333333333333 0.08333333333333333 0.003</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_marker_cell_4_5">
+        <static>true</static>
+        <pose>-13.291666666666668 7.375 0.704 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08333333333333333 0.08333333333333333 0.003</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_marker_cell_5_0">
+        <static>true</static>
+        <pose>-13.708333333333334 7.291666666666666 0.704 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08333333333333333 0.08333333333333333 0.003</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_marker_cell_5_1">
+        <static>true</static>
+        <pose>-13.625 7.291666666666666 0.704 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08333333333333333 0.08333333333333333 0.003</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_marker_cell_5_2">
+        <static>true</static>
+        <pose>-13.541666666666668 7.291666666666666 0.704 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08333333333333333 0.08333333333333333 0.003</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_marker_cell_5_3">
+        <static>true</static>
+        <pose>-13.458333333333334 7.291666666666666 0.704 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08333333333333333 0.08333333333333333 0.003</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_marker_cell_5_4">
+        <static>true</static>
+        <pose>-13.375 7.291666666666666 0.704 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08333333333333333 0.08333333333333333 0.003</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="start_vertiport_marker_cell_5_5">
+        <static>true</static>
+        <pose>-13.291666666666668 7.291666666666666 0.704 0 0 0</pose>
+        <link name="link">
+            <visual name="visual">
+                <geometry><box><size>0.08333333333333333 0.08333333333333333 0.003</size></box></geometry>
+                <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+            </visual>
+            
+        </link>
+    </model>
+    
+    <model name="sim_drone">
+        <static>true</static>
+        <pose>-13.5 7.5 0.702 0 0 0</pose>
+        <link name="link">
+            <visual name="f450_center_hub">
+                <pose>0 0 0.015 0 0 0</pose>
+                <geometry><box><size>0.15 0.15 0.03</size></box></geometry>
+                <material><ambient>0.1 0.1 0.1 1</ambient><diffuse>0.1 0.1 0.1 1</diffuse></material>
+            </visual>
+            <visual name="arm_front_right">
+                <pose>0.113136 -0.113136 0.015 0 0 -0.7854</pose>
+                <geometry><box><size>0.32 0.03 0.02</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            <visual name="arm_front_left">
+                <pose>0.113136 0.113136 0.015 0 0 0.7854</pose>
+                <geometry><box><size>0.32 0.03 0.02</size></box></geometry>
+                <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+            </visual>
+            <visual name="arm_rear_right">
+                <pose>-0.113136 -0.113136 0.015 0 0 0.7854</pose>
+                <geometry><box><size>0.32 0.03 0.02</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            <visual name="arm_rear_left">
+                <pose>-0.113136 0.113136 0.015 0 0 -0.7854</pose>
+                <geometry><box><size>0.32 0.03 0.02</size></box></geometry>
+                <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+            </visual>
+            <visual name="rotor_front_right">
+                <pose>0.226272 -0.226272 0.025 0 0 0</pose>
+                <geometry><cylinder><radius>0.12</radius><length>0.01</length></cylinder></geometry>
+                <material><ambient>0.2 0.2 0.2 0.6</ambient><diffuse>0.2 0.2 0.2 0.6</diffuse></material>
+            </visual>
+            <visual name="rotor_front_left">
+                <pose>0.226272 0.226272 0.025 0 0 0</pose>
+                <geometry><cylinder><radius>0.12</radius><length>0.01</length></cylinder></geometry>
+                <material><ambient>0.2 0.2 0.2 0.6</ambient><diffuse>0.2 0.2 0.2 0.6</diffuse></material>
+            </visual>
+            <visual name="rotor_rear_right">
+                <pose>-0.226272 -0.226272 0.025 0 0 0</pose>
+                <geometry><cylinder><radius>0.12</radius><length>0.01</length></cylinder></geometry>
+                <material><ambient>0.2 0.2 0.2 0.6</ambient><diffuse>0.2 0.2 0.2 0.6</diffuse></material>
+            </visual>
+            <visual name="rotor_rear_left">
+                <pose>-0.226272 0.226272 0.025 0 0 0</pose>
+                <geometry><cylinder><radius>0.12</radius><length>0.01</length></cylinder></geometry>
+                <material><ambient>0.2 0.2 0.2 0.6</ambient><diffuse>0.2 0.2 0.2 0.6</diffuse></material>
+            </visual>
+            <sensor name="sim_drone_camera" type="camera">
+                <always_on>true</always_on><update_rate>30</update_rate>
+                <topic>/sim_drone_camera/image</topic>
+                <pose>0 0 0 0 1.5708 0</pose>
+                <camera>
+                    <horizontal_fov>1.5708</horizontal_fov>
+                    <image><width>640</width><height>480</height><format>R8G8B8</format></image>
+                    <clip><near>0.05</near><far>40.0</far></clip>
+                </camera>
+            </sensor>
+        </link>
+    </model>
+    </world></sdf>
