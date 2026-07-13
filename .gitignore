@@ -6,3 +6,7 @@ log/
 *.bag
 *.db3
 .vscode/
+backup_*/
+backup_old_codes/
+__pycache__/
+*.pyc

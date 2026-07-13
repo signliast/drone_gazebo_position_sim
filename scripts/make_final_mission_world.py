@@ -3,7 +3,7 @@ import math
 import cv2
 import numpy as np
 
-BASE = Path(__file__).resolve().parents[1]
+BASE = Path("/ws")
 WORLD_PATH = BASE / "worlds" / "indoor_mission.world.sdf"
 
 SAFE_LENGTH = 32.0
@@ -20,7 +20,7 @@ VERTIPORT_HEIGHT = 0.7
 # New Position: Attached exactly to the top-left corner of the Mission Area
 START_X = -13.5  # 미션 구역 경계(-12.0)에서 헬리패드 반지름(1.5)만큼만 왼쪽으로 배치
 START_Y = 7.5
-START_Z = VERTIPORT_HEIGHT + 0.002
+START_Z = VERTIPORT_HEIGHT + 0.03
 
 MARKER_SIZE = 0.70 
 MARKER_BOARD_SIZE = 0.90
@@ -34,21 +34,37 @@ MARKERS = [
 
 def box_model(name, pose, size, color, collision=False):
     collision_block = ""
+
     if collision:
         collision_block = f"""
         <collision name="collision">
-            <geometry><box><size>{size}</size></box></geometry>
+            <geometry>
+                <box>
+                    <size>{size}</size>
+                </box>
+            </geometry>
         </collision>
         """
+
     return f"""
     <model name="{name}">
         <static>true</static>
         <pose>{pose}</pose>
+
         <link name="link">
             <visual name="visual">
-                <geometry><box><size>{size}</size></box></geometry>
-                <material><ambient>{color}</ambient><diffuse>{color}</diffuse></material>
+                <geometry>
+                    <box>
+                        <size>{size}</size>
+                    </box>
+                </geometry>
+
+                <material>
+                    <ambient>{color}</ambient>
+                    <diffuse>{color}</diffuse>
+                </material>
             </visual>
+
             {collision_block}
         </link>
     </model>
@@ -151,13 +167,7 @@ def vertiport_sdf():
     sdf += ring_boxes("start_vertiport_black_outer_ring", START_X, START_Y, top_z, 1.35, 0.08, "0 0 0 1", 96)
     sdf += ring_boxes("start_vertiport_red_safety_ring", START_X, START_Y, top_z + 0.002, 1.00, 0.06, "1 0 0 1", 96)
     sdf += box_model("start_vertiport_v_left", f"{START_X - 0.05} {START_Y - 0.32} {top_z + 0.005} 0 0 1.2208", "0.12 1.45 0.005", "0 0 0 1", False)
-    sdf += box_model(
-        "start_vertiport_v_right", 
-        f"{START_X - 0.05} {START_Y + 0.32} {top_z + 0.005} 0 0 1.9208", 
-        "0.12 1.45 0.005", 
-        "0 0 0 1", 
-        False
-    )    
+    sdf += box_model("start_vertiport_v_right", f"{START_X - 0.05} {START_Y + 0.32} {top_z + 0.005} 0 0 1.9208", "0.12 1.45 0.005", "0 0 0 1", False)    
     sdf += aruco_marker_on_vertiport(10, START_X, START_Y)
     return sdf
 
@@ -166,7 +176,7 @@ def safe_area_boundary_sdf():
     thickness = 0.14
     sdf = ""
     sdf += box_model("safe_boundary_top", f"0 {SAFE_WIDTH / 2.0} {z} 0 0 0", f"{SAFE_LENGTH} {thickness} 0.01", "0.0 0.6 0.0 1", False)
-    sdf += box_model("safe_bosundary_bottom", f"0 {-SAFE_WIDTH / 2.0} {z} 0 0 0", f"{SAFE_LENGTH} {thickness} 0.01", "0.0 0.6 0.0 1", False)
+    sdf += box_model("safe_boundary_bottom", f"0 {-SAFE_WIDTH / 2.0} {z} 0 0 0", f"{SAFE_LENGTH} {thickness} 0.01", "0.0 0.6 0.0 1", False)
     sdf += box_model("safe_boundary_left", f"{-SAFE_LENGTH / 2.0} 0 {z} 0 0 0", f"{thickness} {SAFE_WIDTH} 0.01", "0.0 0.6 0.0 1", False)
     sdf += box_model("safe_boundary_right", f"{SAFE_LENGTH / 2.0} 0 {z} 0 0 0", f"{thickness} {SAFE_WIDTH} 0.01", "0.0 0.6 0.0 1", False)
     return sdf
